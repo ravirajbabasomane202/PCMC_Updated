@@ -35,12 +35,20 @@ def health():
 @public_bp.route('/subjects', methods=['GET'])
 def get_subjects():
     """Get all available grievance subjects."""
-    subjects = MasterSubjects.query.all()
-    return jsonify(subjects_schema.dump(subjects)), 200
+    try:
+        subjects = MasterSubjects.query.all()
+        return jsonify(subjects_schema.dump(subjects)), 200
+    except Exception as e:
+        current_app.logger.exception('Failed to fetch subjects')
+        return jsonify([]), 200
 
 
 @public_bp.route('/areas', methods=['GET'])
 def get_areas():
     """Get all available grievance areas."""
-    areas = MasterAreas.query.all()
-    return jsonify(areas_schema.dump(areas)), 200
+    try:
+        areas = MasterAreas.query.all()
+        return jsonify(areas_schema.dump(areas)), 200
+    except Exception as e:
+        current_app.logger.exception('Failed to fetch areas')
+        return jsonify([]), 200
