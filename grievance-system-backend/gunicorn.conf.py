@@ -14,9 +14,10 @@ import os
 bind = f"0.0.0.0:{os.environ.get('PORT', '5000')}"
 
 # ── Workers ───────────────────────────────────────────────────────────────────
-# gevent workers handle concurrent I/O without blocking (ideal for DB + HTTP calls)
-worker_class = "gevent"
-worker_connections = 1000          # Max simultaneous greenlets per worker
+# Threaded workers handle concurrent requests without gevent monkey-patching issues.
+worker_class = "gthread"
+threads = int(os.environ.get("WEB_THREADS", "4"))
+worker_connections = 1000          # Not used by gthread, kept for compatibility
 
 # Rule of thumb: (2 × CPU cores) + 1
 # For a 2-core machine → 5 workers; 100 users / 5 workers = 20 req/worker
