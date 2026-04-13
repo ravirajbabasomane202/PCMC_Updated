@@ -1,0 +1,57 @@
+# ──────────────────────────────────────────────
+# PCMC Grievance System — Python Backend
+# Production-ready requirements (no Firebase)
+# ──────────────────────────────────────────────
+
+# Core framework
+Flask==3.0.3
+Werkzeug==3.0.3
+
+# Database
+Flask-SQLAlchemy==3.1.1
+Flask-Migrate==4.0.7
+psycopg2-binary>=2.9.9   # PostgreSQL driver
+
+# Auth & security
+Flask-JWT-Extended==4.6.0
+Flask-Bcrypt==1.0.1
+itsdangerous==2.2.0
+
+# Email
+Flask-Mail==0.10.0
+
+# Serialization
+marshmallow==3.21.3
+marshmallow-enum==1.5.1
+marshmallow-sqlalchemy==1.1.0
+
+# Networking / OAuth (server-side only — no client SDK)
+requests==2.32.3
+requests-oauthlib==1.3.1
+authlib==1.3.1
+
+# SMS / OTP
+twilio==8.10.0
+
+# Rate limiting (100-user load protection)
+Flask-Limiter==3.7.0
+redis>=5.0.4              # For distributed rate-limit storage (optional)
+
+# CORS
+flask-cors==4.0.1
+
+# HTTP & env
+python-dotenv==1.0.1
+
+# Reports / exports
+pandas==2.2.2
+xlsxwriter==3.2.0
+reportlab==4.2.2
+openpyxl==3.1.4
+
+# WSGI server
+gunicorn==22.0.0
+gevent==24.2.1            # Async worker — handles 100 concurrent users easily
+
+# Utilities
+Pillow==10.3.0            # Image processing

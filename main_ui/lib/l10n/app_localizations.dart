@@ -1,0 +1,1962 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart' as intl;
+
+import 'app_localizations_en.dart';
+import 'app_localizations_hi.dart';
+import 'app_localizations_mr.dart';
+
+// ignore_for_file: type=lint
+
+/// Callers can lookup localized strings with an instance of AppLocalizations
+/// returned by `AppLocalizations.of(context)`.
+///
+/// Applications need to include `AppLocalizations.delegate()` in their app's
+/// `localizationDelegates` list, and the locales they support in the app's
+/// `supportedLocales` list. For example:
+///
+/// ```dart
+/// import 'l10n/app_localizations.dart';
+///
+/// return MaterialApp(
+///   localizationsDelegates: AppLocalizations.localizationsDelegates,
+///   supportedLocales: AppLocalizations.supportedLocales,
+///   home: MyApplicationHome(),
+/// );
+/// ```
+///
+/// ## Update pubspec.yaml
+///
+/// Please make sure to update your pubspec.yaml to include the following
+/// packages:
+///
+/// ```yaml
+/// dependencies:
+///   # Internationalization support.
+///   flutter_localizations:
+///     sdk: flutter
+///   intl: any # Use the pinned version from flutter_localizations
+///
+///   # Rest of dependencies
+/// ```
+///
+/// ## iOS Applications
+///
+/// iOS applications define key application metadata, including supported
+/// locales, in an Info.plist file that is built into the application bundle.
+/// To configure the locales supported by your app, you’ll need to edit this
+/// file.
+///
+/// First, open your project’s ios/Runner.xcworkspace Xcode workspace file.
+/// Then, in the Project Navigator, open the Info.plist file under the Runner
+/// project’s Runner folder.
+///
+/// Next, select the Information Property List item, select Add Item from the
+/// Editor menu, then select Localizations from the pop-up menu.
+///
+/// Select and expand the newly-created Localizations item then, for each
+/// locale your application supports, add a new item and select the locale
+/// you wish to add from the pop-up menu in the Value field. This list should
+/// be consistent with the languages listed in the AppLocalizations.supportedLocales
+/// property.
+abstract class AppLocalizations {
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+
+  final String localeName;
+
+  static AppLocalizations? of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  }
+
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
+
+  /// A list of this localizations delegate along with the default localizations
+  /// delegates.
+  ///
+  /// Returns a list of localizations delegates containing this delegate along with
+  /// GlobalMaterialLocalizations.delegate, GlobalCupertinoLocalizations.delegate,
+  /// and GlobalWidgetsLocalizations.delegate.
+  ///
+  /// Additional delegates can be added by appending to this list in
+  /// MaterialApp. This list does not have to be used at all if a custom list
+  /// of delegates is preferred or required.
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
+
+  /// A list of this localizations delegate's supported locales.
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
+    Locale('hi'),
+    Locale('mr'),
+  ];
+
+  /// App title displayed on home screen
+  ///
+  /// In en, this message translates to:
+  /// **'NIVARAN'**
+  String get appTitle;
+
+  /// Label for login button
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get login;
+
+  /// Label for register button
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get register;
+
+  /// Label for submit grievance button
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Grievance'**
+  String get submitGrievance;
+
+  /// Error message for failed login
+  ///
+  /// In en, this message translates to:
+  /// **'Authentication failed'**
+  String get authenticationFailed;
+
+  /// Generic error label
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred'**
+  String get error;
+
+  /// Label for name input field
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get name;
+
+  /// Label for email input field
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// Label for password input field
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// Prompt to register
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account? Register'**
+  String get registerPrompt;
+
+  /// Prompt to login
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account? Login'**
+  String get loginPrompt;
+
+  /// Label for Google login button
+  ///
+  /// In en, this message translates to:
+  /// **'Login with Google'**
+  String get googleLogin;
+
+  /// Error message for failed Google login
+  ///
+  /// In en, this message translates to:
+  /// **'Google login failed'**
+  String get googleLoginFailed;
+
+  /// Title for login failure dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Login Failed'**
+  String get loginFailed;
+
+  /// Title for registration failure dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Registration Failed'**
+  String get registrationFailed;
+
+  /// Label for OK button in dialogs
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
+
+  /// Label for settings screen
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// Label for dark mode toggle
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get darkMode;
+
+  /// Label for language selector
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @comments.
+  ///
+  /// In en, this message translates to:
+  /// **'Comments'**
+  String get comments;
+
+  /// No description provided for @noComments.
+  ///
+  /// In en, this message translates to:
+  /// **'No Comments Yet'**
+  String get noComments;
+
+  /// No description provided for @noCommentsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Be the first to add a comment!'**
+  String get noCommentsMessage;
+
+  /// No description provided for @addComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Comment'**
+  String get addComment;
+
+  /// No description provided for @yourComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Comment'**
+  String get yourComment;
+
+  /// No description provided for @commentCannotBeEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment cannot be empty'**
+  String get commentCannotBeEmpty;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @submit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submit;
+
+  /// No description provided for @commentAddedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment added successfully'**
+  String get commentAddedSuccess;
+
+  /// No description provided for @failedToAddComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to add comment'**
+  String get failedToAddComment;
+
+  /// No description provided for @grievanceDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Grievance Details'**
+  String get grievanceDetails;
+
+  /// No description provided for @status.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get status;
+
+  /// No description provided for @submitFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Feedback'**
+  String get submitFeedback;
+
+  /// No description provided for @selectRating.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Rating'**
+  String get selectRating;
+
+  /// No description provided for @feedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback'**
+  String get feedback;
+
+  /// No description provided for @pleaseProvideRating.
+  ///
+  /// In en, this message translates to:
+  /// **'Please provide a rating'**
+  String get pleaseProvideRating;
+
+  /// No description provided for @feedbackSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Your feedback has been submitted'**
+  String get feedbackSubmitted;
+
+  /// No description provided for @failedToLoadGrievance.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load grievance'**
+  String get failedToLoadGrievance;
+
+  /// No description provided for @userHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'User History'**
+  String get userHistory;
+
+  /// No description provided for @userNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'User not found'**
+  String get userNotFound;
+
+  /// No description provided for @noGrievancesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No grievances found'**
+  String get noGrievancesFound;
+
+  /// No description provided for @noGrievances.
+  ///
+  /// In en, this message translates to:
+  /// **'No Grievances'**
+  String get noGrievances;
+
+  /// No description provided for @noGrievancesMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no grievances to display.'**
+  String get noGrievancesMessage;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @filterByStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by Status'**
+  String get filterByStatus;
+
+  /// No description provided for @filterByPriority.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by Priority'**
+  String get filterByPriority;
+
+  /// No description provided for @filterByArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by Area'**
+  String get filterByArea;
+
+  /// No description provided for @filterBySubject.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by Subject'**
+  String get filterBySubject;
+
+  /// No description provided for @reassign.
+  ///
+  /// In en, this message translates to:
+  /// **'Reassign'**
+  String get reassign;
+
+  /// No description provided for @escalate.
+  ///
+  /// In en, this message translates to:
+  /// **'Escalate'**
+  String get escalate;
+
+  /// No description provided for @updateStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Status'**
+  String get updateStatus;
+
+  /// No description provided for @viewDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'View Details'**
+  String get viewDetails;
+
+  /// No description provided for @reassignGrievance.
+  ///
+  /// In en, this message translates to:
+  /// **'Reassign Grievance'**
+  String get reassignGrievance;
+
+  /// No description provided for @selectAssignee.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Assignee'**
+  String get selectAssignee;
+
+  /// No description provided for @selectStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Status'**
+  String get selectStatus;
+
+  /// No description provided for @update.
+  ///
+  /// In en, this message translates to:
+  /// **'Update'**
+  String get update;
+
+  /// No description provided for @noComplaints.
+  ///
+  /// In en, this message translates to:
+  /// **'No Complaints'**
+  String get noComplaints;
+
+  /// No description provided for @noComplaintsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no complaints to display.'**
+  String get noComplaintsMessage;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get tryAgain;
+
+  /// No description provided for @reassignComplaint.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign'**
+  String get reassignComplaint;
+
+  /// No description provided for @escalateComplaint.
+  ///
+  /// In en, this message translates to:
+  /// **'Escalate'**
+  String get escalateComplaint;
+
+  /// Error message when user ID is not provided
+  ///
+  /// In en, this message translates to:
+  /// **'User ID is required'**
+  String get userIdRequired;
+
+  /// No description provided for @noConfigs.
+  ///
+  /// In en, this message translates to:
+  /// **'No Configurations'**
+  String get noConfigs;
+
+  /// No description provided for @noConfigsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no configurations to display. Add one below.'**
+  String get noConfigsMessage;
+
+  /// No description provided for @addConfig.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Configuration'**
+  String get addConfig;
+
+  /// No description provided for @editConfig.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Configuration'**
+  String get editConfig;
+
+  /// No description provided for @configKey.
+  ///
+  /// In en, this message translates to:
+  /// **'Configuration Key'**
+  String get configKey;
+
+  /// No description provided for @configValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Configuration Value'**
+  String get configValue;
+
+  /// No description provided for @configCannotBeEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Key and Value cannot be empty'**
+  String get configCannotBeEmpty;
+
+  /// No description provided for @configValueCannotBeEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Value cannot be empty'**
+  String get configValueCannotBeEmpty;
+
+  /// No description provided for @configAddedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Configuration added successfully'**
+  String get configAddedSuccess;
+
+  /// No description provided for @configUpdatedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Configuration updated successfully'**
+  String get configUpdatedSuccess;
+
+  /// No description provided for @track_grievances.
+  ///
+  /// In en, this message translates to:
+  /// **'Track Your Grievances'**
+  String get track_grievances;
+
+  /// No description provided for @no_grievances.
+  ///
+  /// In en, this message translates to:
+  /// **'No Grievances Yet'**
+  String get no_grievances;
+
+  /// No description provided for @no_grievances_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit your first grievance to get started'**
+  String get no_grievances_message;
+
+  /// No description provided for @submit_grievance.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Grievance'**
+  String get submit_grievance;
+
+  /// No description provided for @your_grievances.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Grievances'**
+  String get your_grievances;
+
+  /// No description provided for @please_login.
+  ///
+  /// In en, this message translates to:
+  /// **'Please login'**
+  String get please_login;
+
+  /// No description provided for @addUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Add User'**
+  String get addUser;
+
+  /// No description provided for @role.
+  ///
+  /// In en, this message translates to:
+  /// **'Role'**
+  String get role;
+
+  /// No description provided for @add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get add;
+
+  /// No description provided for @userAddedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'User added successfully'**
+  String get userAddedSuccess;
+
+  /// No description provided for @failedToAddUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to add user'**
+  String get failedToAddUser;
+
+  /// No description provided for @editUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit User'**
+  String get editUser;
+
+  /// No description provided for @deleteUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete User'**
+  String get deleteUser;
+
+  /// No description provided for @userUpdatedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'User updated successfully'**
+  String get userUpdatedSuccess;
+
+  /// No description provided for @failedToUpdateUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update user'**
+  String get failedToUpdateUser;
+
+  /// No description provided for @deleteUserConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this user?'**
+  String get deleteUserConfirmation;
+
+  /// No description provided for @userDeletedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'User deleted successfully'**
+  String get userDeletedSuccess;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @failedToDeleteUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete User'**
+  String get failedToDeleteUser;
+
+  /// No description provided for @manageUsers.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Users'**
+  String get manageUsers;
+
+  /// No description provided for @noUsers.
+  ///
+  /// In en, this message translates to:
+  /// **'No Users'**
+  String get noUsers;
+
+  /// No description provided for @noUsersMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no users to display.'**
+  String get noUsersMessage;
+
+  /// No description provided for @noEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'No Email'**
+  String get noEmail;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing login...'**
+  String get loading;
+
+  /// No description provided for @viewgrievanceetails.
+  ///
+  /// In en, this message translates to:
+  /// **'View Grievances'**
+  String get viewgrievanceetails;
+
+  /// No description provided for @assignGrievance.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign Grievance'**
+  String get assignGrievance;
+
+  /// No description provided for @rejectGrievance.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject Grievance'**
+  String get rejectGrievance;
+
+  /// No description provided for @rejectionReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejection Reason'**
+  String get rejectionReason;
+
+  /// No description provided for @reject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get reject;
+
+  /// No description provided for @assignedGrievances.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned Grievances'**
+  String get assignedGrievances;
+
+  /// No description provided for @noAssigned.
+  ///
+  /// In en, this message translates to:
+  /// **'No Assigned Grievances'**
+  String get noAssigned;
+
+  /// No description provided for @noAssignedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no grievances assigned to you.'**
+  String get noAssignedMessage;
+
+  /// No description provided for @upload.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload'**
+  String get upload;
+
+  /// No description provided for @uploadWorkproof.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Work Proof'**
+  String get uploadWorkproof;
+
+  /// No description provided for @invalidRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid Role'**
+  String get invalidRole;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @logoutFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout Failed'**
+  String get logoutFailed;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @appVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'App Version'**
+  String get appVersion;
+
+  /// No description provided for @about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// No description provided for @contactSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Support'**
+  String get contactSupport;
+
+  /// No description provided for @faqs.
+  ///
+  /// In en, this message translates to:
+  /// **'FAQs'**
+  String get faqs;
+
+  /// No description provided for @helpSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Help & Support'**
+  String get helpSupport;
+
+  /// No description provided for @viewPrivacyPolicyprivacySecurity.
+  ///
+  /// In en, this message translates to:
+  /// **'View Privacy Policy / Privacy & Security'**
+  String get viewPrivacyPolicyprivacySecurity;
+
+  /// No description provided for @enableNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Notifications'**
+  String get enableNotifications;
+
+  /// No description provided for @account.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get account;
+
+  /// No description provided for @privacySecurity.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy & Security'**
+  String get privacySecurity;
+
+  /// No description provided for @viewPrivacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'View Privacy Policy'**
+  String get viewPrivacyPolicy;
+
+  /// No description provided for @invalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid Email'**
+  String get invalidEmail;
+
+  /// No description provided for @nameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Name is required'**
+  String get nameRequired;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get emailRequired;
+
+  /// No description provided for @passwordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get passwordRequired;
+
+  /// No description provided for @recentComplaints.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Complaints'**
+  String get recentComplaints;
+
+  /// No description provided for @filterByPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by Period'**
+  String get filterByPeriod;
+
+  /// No description provided for @totalComplaints.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Complaints'**
+  String get totalComplaints;
+
+  /// No description provided for @day.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get day;
+
+  /// No description provided for @week.
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get week;
+
+  /// No description provided for @month.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get month;
+
+  /// No description provided for @year.
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get year;
+
+  /// No description provided for @allTime.
+  ///
+  /// In en, this message translates to:
+  /// **'All Time'**
+  String get allTime;
+
+  /// No description provided for @complaintStatusOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Complaint Status Overview'**
+  String get complaintStatusOverview;
+
+  /// No description provided for @grievanceTrend.
+  ///
+  /// In en, this message translates to:
+  /// **'Grievance Trend'**
+  String get grievanceTrend;
+
+  /// No description provided for @numberOfGrievances.
+  ///
+  /// In en, this message translates to:
+  /// **'Number of Grievances'**
+  String get numberOfGrievances;
+
+  /// No description provided for @timePeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Time Period'**
+  String get timePeriod;
+
+  /// No description provided for @deptWiseDistribution.
+  ///
+  /// In en, this message translates to:
+  /// **'Department-wise Distribution'**
+  String get deptWiseDistribution;
+
+  /// No description provided for @department.
+  ///
+  /// In en, this message translates to:
+  /// **'Department'**
+  String get department;
+
+  /// No description provided for @slaMetrics.
+  ///
+  /// In en, this message translates to:
+  /// **'SLA Metrics'**
+  String get slaMetrics;
+
+  /// No description provided for @slaDays.
+  ///
+  /// In en, this message translates to:
+  /// **'SLA Days'**
+  String get slaDays;
+
+  /// No description provided for @complianceRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Compliance Rate'**
+  String get complianceRate;
+
+  /// No description provided for @avgResolutionTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg Resolution Time'**
+  String get avgResolutionTime;
+
+  /// No description provided for @exportPDF.
+  ///
+  /// In en, this message translates to:
+  /// **'Export PDF'**
+  String get exportPDF;
+
+  /// No description provided for @exportCSV.
+  ///
+  /// In en, this message translates to:
+  /// **'Export CSV'**
+  String get exportCSV;
+
+  /// No description provided for @exportExcel.
+  ///
+  /// In en, this message translates to:
+  /// **'Export Excel'**
+  String get exportExcel;
+
+  /// No description provided for @reportExported.
+  ///
+  /// In en, this message translates to:
+  /// **'Report exported'**
+  String get reportExported;
+
+  /// No description provided for @errorExportingReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Error exporting report'**
+  String get errorExportingReport;
+
+  /// No description provided for @viewAuditLogs.
+  ///
+  /// In en, this message translates to:
+  /// **'View Audit Logs'**
+  String get viewAuditLogs;
+
+  /// No description provided for @complaintManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Complaint Management'**
+  String get complaintManagement;
+
+  /// No description provided for @manageConfigs.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Configurations'**
+  String get manageConfigs;
+
+  /// No description provided for @manageSubjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Subjects'**
+  String get manageSubjects;
+
+  /// No description provided for @manageAreas.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Areas'**
+  String get manageAreas;
+
+  /// No description provided for @reports.
+  ///
+  /// In en, this message translates to:
+  /// **'Reports'**
+  String get reports;
+
+  /// No description provided for @assignedList.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned Grievances'**
+  String get assignedList;
+
+  /// No description provided for @announcements.
+  ///
+  /// In en, this message translates to:
+  /// **'Announcements'**
+  String get announcements;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicy;
+
+  /// No description provided for @clearFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Filters'**
+  String get clearFilters;
+
+  /// No description provided for @addAnnouncement.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Announcement'**
+  String get addAnnouncement;
+
+  /// No description provided for @noAnnouncements.
+  ///
+  /// In en, this message translates to:
+  /// **'No announcements available'**
+  String get noAnnouncements;
+
+  /// No description provided for @title.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get title;
+
+  /// No description provided for @message.
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get message;
+
+  /// No description provided for @type.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get type;
+
+  /// No description provided for @targetRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Target Role'**
+  String get targetRole;
+
+  /// No description provided for @selectExpiration.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Expiration'**
+  String get selectExpiration;
+
+  /// No description provided for @announcementAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Announcement added successfully'**
+  String get announcementAdded;
+
+  /// No description provided for @takeAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Take Action'**
+  String get takeAction;
+
+  /// No description provided for @refresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get refresh;
+
+  /// No description provided for @exportReports.
+  ///
+  /// In en, this message translates to:
+  /// **'Export Reports'**
+  String get exportReports;
+
+  /// No description provided for @filters.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters'**
+  String get filters;
+
+  /// No description provided for @apply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get apply;
+
+  /// No description provided for @locationPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission denied'**
+  String get locationPermissionDenied;
+
+  /// No description provided for @pleaseFillAllFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Please fill all fields'**
+  String get pleaseFillAllFields;
+
+  /// No description provided for @grievanceSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Grievance submitted'**
+  String get grievanceSubmitted;
+
+  /// No description provided for @titleRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Title is required'**
+  String get titleRequired;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @descriptionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Description is required'**
+  String get descriptionRequired;
+
+  /// No description provided for @categorization.
+  ///
+  /// In en, this message translates to:
+  /// **'Categorization'**
+  String get categorization;
+
+  /// No description provided for @subjectRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Subject is required'**
+  String get subjectRequired;
+
+  /// No description provided for @areaRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Area is required'**
+  String get areaRequired;
+
+  /// No description provided for @locationDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Location details'**
+  String get locationDetails;
+
+  /// No description provided for @searchByName.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name'**
+  String get searchByName;
+
+  /// No description provided for @noResultsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No results found'**
+  String get noResultsFound;
+
+  /// No description provided for @noMatchingGrievances.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching grievances found'**
+  String get noMatchingGrievances;
+
+  /// No description provided for @allUsersHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'All Users History'**
+  String get allUsersHistory;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @areYouSureDeleteGrievance.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete the grievance?'**
+  String get areYouSureDeleteGrievance;
+
+  /// No description provided for @confirmDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Delete'**
+  String get confirmDelete;
+
+  /// No description provided for @failedToDeleteGrievance.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete grievance'**
+  String get failedToDeleteGrievance;
+
+  /// No description provided for @grievanceDeletedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Grievance deleted successfully'**
+  String get grievanceDeletedSuccessfully;
+
+  /// No description provided for @editGrievance.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Grievance'**
+  String get editGrievance;
+
+  /// No description provided for @statusNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get statusNew;
+
+  /// No description provided for @statusInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'In Progress'**
+  String get statusInProgress;
+
+  /// No description provided for @statusResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get statusResolved;
+
+  /// No description provided for @statusRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get statusRejected;
+
+  /// No description provided for @statusOnHold.
+  ///
+  /// In en, this message translates to:
+  /// **'On Hold'**
+  String get statusOnHold;
+
+  /// No description provided for @statusClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get statusClosed;
+
+  /// No description provided for @statusUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get statusUnknown;
+
+  /// No description provided for @submitGrievanceSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Report issues in just a few taps'**
+  String get submitGrievanceSubtitle;
+
+  /// No description provided for @trackGrievancesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Real-time updates on your complaints'**
+  String get trackGrievancesSubtitle;
+
+  /// No description provided for @quickResolutionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Resolutions'**
+  String get quickResolutionsTitle;
+
+  /// No description provided for @quickResolutionsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Get your issues resolved faster'**
+  String get quickResolutionsSubtitle;
+
+  /// No description provided for @track.
+  ///
+  /// In en, this message translates to:
+  /// **'Track'**
+  String get track;
+
+  /// No description provided for @stageReviewedBySupervisor.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewed by Supervisor'**
+  String get stageReviewedBySupervisor;
+
+  /// No description provided for @stageAssignedToFieldStaff.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned to Field Staff'**
+  String get stageAssignedToFieldStaff;
+
+  /// No description provided for @stageResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get stageResolved;
+
+  /// No description provided for @submittedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted on'**
+  String get submittedOn;
+
+  /// No description provided for @userLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get userLabel;
+
+  /// No description provided for @grievanceProgressTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Grievance Progress'**
+  String get grievanceProgressTitle;
+
+  /// No description provided for @stageSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted'**
+  String get stageSubmitted;
+
+  /// No description provided for @assignedToLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned to'**
+  String get assignedToLabel;
+
+  /// No description provided for @fieldStaffLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Field Staff'**
+  String get fieldStaffLabel;
+
+  /// No description provided for @resolvedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved on'**
+  String get resolvedOn;
+
+  /// Time difference in days
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, one{1 day ago} other{{days} days ago}}'**
+  String timeAgoDays(num days);
+
+  /// Time difference in hours
+  ///
+  /// In en, this message translates to:
+  /// **'{hours, plural, one{1 hour ago} other{{hours} hours ago}}'**
+  String timeAgoHours(num hours);
+
+  /// Time difference in minutes
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes, plural, one{1 minute ago} other{{minutes} minutes ago}}'**
+  String timeAgoMinutes(num minutes);
+
+  /// No description provided for @timeAgoJustNow.
+  ///
+  /// In en, this message translates to:
+  /// **'just now'**
+  String get timeAgoJustNow;
+
+  /// No description provided for @notApplicable.
+  ///
+  /// In en, this message translates to:
+  /// **'N/A'**
+  String get notApplicable;
+
+  /// Error message when a URL cannot be opened.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not launch {url}'**
+  String couldNotLaunchUrl(Object url);
+
+  /// No description provided for @details.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get details;
+
+  /// No description provided for @created.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get created;
+
+  /// No description provided for @lastUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Updated'**
+  String get lastUpdated;
+
+  /// No description provided for @attachments.
+  ///
+  /// In en, this message translates to:
+  /// **'Attachments'**
+  String get attachments;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @unknownRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Role'**
+  String get unknownRole;
+
+  /// No description provided for @profilePictureUpdateMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile picture selected. Save to upload.'**
+  String get profilePictureUpdateMessage;
+
+  /// No description provided for @lastLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Login'**
+  String get lastLogin;
+
+  /// No description provided for @accountStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Status'**
+  String get accountStatus;
+
+  /// No description provided for @statusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get statusActive;
+
+  /// No description provided for @statusInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get statusInactive;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfile;
+
+  /// No description provided for @loadingData.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loadingData;
+
+  /// No description provided for @appNameFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'PCMC App'**
+  String get appNameFallback;
+
+  /// No description provided for @packageNameFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'com.example.pcmcapp'**
+  String get packageNameFallback;
+
+  /// No description provided for @currentVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Version'**
+  String get currentVersion;
+
+  /// No description provided for @minimumOS.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum OS'**
+  String get minimumOS;
+
+  /// No description provided for @checkForUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'Check for Updates'**
+  String get checkForUpdates;
+
+  /// No description provided for @versionInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Version Information'**
+  String get versionInformation;
+
+  /// No description provided for @upToDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Up to date'**
+  String get upToDate;
+
+  /// No description provided for @releaseType.
+  ///
+  /// In en, this message translates to:
+  /// **'Release Type'**
+  String get releaseType;
+
+  /// No description provided for @size.
+  ///
+  /// In en, this message translates to:
+  /// **'Size'**
+  String get size;
+
+  /// No description provided for @thankYouMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for using our app!'**
+  String get thankYouMessage;
+
+  /// No description provided for @needHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Need Help?'**
+  String get needHelp;
+
+  /// No description provided for @supportTeamMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Our support team is here to help you with any questions or issues you might have'**
+  String get supportTeamMessage;
+
+  /// No description provided for @contactOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Options'**
+  String get contactOptions;
+
+  /// No description provided for @emailSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Support'**
+  String get emailSupport;
+
+  /// No description provided for @emailSupportResponseTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Get responses within 24 hours'**
+  String get emailSupportResponseTime;
+
+  /// No description provided for @callSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Call Support'**
+  String get callSupport;
+
+  /// No description provided for @callSupportAvailability.
+  ///
+  /// In en, this message translates to:
+  /// **'Available 9AM - 6PM (Mon-Sat)'**
+  String get callSupportAvailability;
+
+  /// No description provided for @faqsHelpCenter.
+  ///
+  /// In en, this message translates to:
+  /// **'FAQs & Help Center'**
+  String get faqsHelpCenter;
+
+  /// No description provided for @faqsHelpCenterSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Find answers to common questions'**
+  String get faqsHelpCenterSubtitle;
+
+  /// No description provided for @weAreHereToHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'re here to help you!'**
+  String get weAreHereToHelp;
+
+  /// No description provided for @couldNotLaunchPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not launch phone'**
+  String get couldNotLaunchPhone;
+
+  /// No description provided for @privacyPolicyCommitmentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Our Commitment'**
+  String get privacyPolicyCommitmentTitle;
+
+  /// No description provided for @privacyPolicyCommitmentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We value your privacy and are committed to protecting your personal data. This policy explains how we handle your information securely.'**
+  String get privacyPolicyCommitmentBody;
+
+  /// No description provided for @privacyPolicyDataCollectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'1. Data Collection'**
+  String get privacyPolicyDataCollectionTitle;
+
+  /// No description provided for @privacyPolicyDataCollectionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We collect your name, email, and grievance details only to process complaints.'**
+  String get privacyPolicyDataCollectionBody;
+
+  /// No description provided for @privacyPolicyDataUsageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'2. Data Usage'**
+  String get privacyPolicyDataUsageTitle;
+
+  /// No description provided for @privacyPolicyDataUsageBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data is used solely for grievance redressal and system improvement.'**
+  String get privacyPolicyDataUsageBody;
+
+  /// No description provided for @privacyPolicySecurityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'3. Security'**
+  String get privacyPolicySecurityTitle;
+
+  /// No description provided for @privacyPolicySecurityBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We implement encryption and strict access policies to safeguard your information.'**
+  String get privacyPolicySecurityBody;
+
+  /// No description provided for @faqsHeaderSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Find answers to common questions about using our app'**
+  String get faqsHeaderSubtitle;
+
+  /// No description provided for @faqsCommonQuestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Common Questions'**
+  String get faqsCommonQuestions;
+
+  /// No description provided for @faqsStillNeedHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Still need help?'**
+  String get faqsStillNeedHelp;
+
+  /// No description provided for @faqsContactSupportMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Can\'t find the answer you\'re looking for? Contact our support team for assistance.'**
+  String get faqsContactSupportMessage;
+
+  /// No description provided for @faq1_q.
+  ///
+  /// In en, this message translates to:
+  /// **'How to submit a grievance?'**
+  String get faq1_q;
+
+  /// No description provided for @faq1_a.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to \'Submit Grievance\' from the home screen and fill in details.'**
+  String get faq1_a;
+
+  /// No description provided for @faq2_q.
+  ///
+  /// In en, this message translates to:
+  /// **'How can I track my complaint?'**
+  String get faq2_q;
+
+  /// No description provided for @faq2_a.
+  ///
+  /// In en, this message translates to:
+  /// **'Navigate to \'Track Grievance\' and enter your grievance ID.'**
+  String get faq2_a;
+
+  /// No description provided for @faq3_q.
+  ///
+  /// In en, this message translates to:
+  /// **'Can I upload documents?'**
+  String get faq3_q;
+
+  /// No description provided for @faq3_a.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, you can upload photos or PDFs as proof while submitting grievances.'**
+  String get faq3_a;
+
+  /// No description provided for @faq4_q.
+  ///
+  /// In en, this message translates to:
+  /// **'How long does it take to resolve?'**
+  String get faq4_q;
+
+  /// No description provided for @faq4_a.
+  ///
+  /// In en, this message translates to:
+  /// **'It usually takes 7 working days, depending on priority.'**
+  String get faq4_a;
+
+  /// No description provided for @faq5_q.
+  ///
+  /// In en, this message translates to:
+  /// **'What types of grievances can I report?'**
+  String get faq5_q;
+
+  /// No description provided for @faq5_a.
+  ///
+  /// In en, this message translates to:
+  /// **'You can report issues related to sanitation, roads, water supply, electricity, and other civic issues.'**
+  String get faq5_a;
+
+  /// No description provided for @faq6_q.
+  ///
+  /// In en, this message translates to:
+  /// **'Is there a way to edit my submitted grievance?'**
+  String get faq6_q;
+
+  /// No description provided for @faq6_a.
+  ///
+  /// In en, this message translates to:
+  /// **'You can edit your grievance within 24 hours of submission from the \'My Grievances\' section.'**
+  String get faq6_a;
+
+  /// No description provided for @faq7_q.
+  ///
+  /// In en, this message translates to:
+  /// **'How will I be notified about updates?'**
+  String get faq7_q;
+
+  /// No description provided for @faq7_a.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ll receive push notifications and email updates when there\'s progress on your grievance.'**
+  String get faq7_a;
+
+  /// No description provided for @phoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get phoneNumber;
+
+  /// No description provided for @phoneNumberRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number is required'**
+  String get phoneNumberRequired;
+
+  /// No description provided for @invalidPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid phone number'**
+  String get invalidPhoneNumber;
+
+  /// No description provided for @passwordTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get passwordTooShort;
+
+  /// No description provided for @departmentIdOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Department ID (Optional)'**
+  String get departmentIdOptional;
+
+  /// No description provided for @roleCitizen.
+  ///
+  /// In en, this message translates to:
+  /// **'CITIZEN'**
+  String get roleCitizen;
+
+  /// No description provided for @roleSupervisor.
+  ///
+  /// In en, this message translates to:
+  /// **'SUPERVISOR'**
+  String get roleSupervisor;
+
+  /// No description provided for @roleFieldStaff.
+  ///
+  /// In en, this message translates to:
+  /// **'FIELD_STAFF'**
+  String get roleFieldStaff;
+
+  /// No description provided for @roleAdmin.
+  ///
+  /// In en, this message translates to:
+  /// **'ADMIN'**
+  String get roleAdmin;
+
+  /// No description provided for @noMatchingUsers.
+  ///
+  /// In en, this message translates to:
+  /// **'No users found matching your search'**
+  String get noMatchingUsers;
+
+  /// No description provided for @searchByNameOrEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name or email...'**
+  String get searchByNameOrEmail;
+
+  /// No description provided for @welcomeBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back! Please sign in to continue'**
+  String get welcomeBack;
+
+  /// No description provided for @createAccountPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Create an account to get started'**
+  String get createAccountPrompt;
+
+  /// No description provided for @voterId.
+  ///
+  /// In en, this message translates to:
+  /// **'Voter ID'**
+  String get voterId;
+
+  /// No description provided for @invalidMobileNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid mobile number'**
+  String get invalidMobileNumber;
+
+  /// No description provided for @citizenName.
+  ///
+  /// In en, this message translates to:
+  /// **'Citizen Name'**
+  String get citizenName;
+
+  /// No description provided for @citizenId.
+  ///
+  /// In en, this message translates to:
+  /// **'Citizen ID'**
+  String get citizenId;
+
+  /// No description provided for @submittedFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted Feedback'**
+  String get submittedFeedback;
+
+  /// No description provided for @rating.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating'**
+  String get rating;
+
+  /// No description provided for @feedbackComments.
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback Comments'**
+  String get feedbackComments;
+
+  /// No description provided for @addressRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Address is required'**
+  String get addressRequired;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot Password?'**
+  String get forgotPassword;
+
+  /// No description provided for @forgotPasswordDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email address below. We\'ll send you a link to reset your password on our website.'**
+  String get forgotPasswordDescription;
+
+  /// No description provided for @send.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Reset Link'**
+  String get send;
+}
+
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
+  const _AppLocalizationsDelegate();
+
+  @override
+  Future<AppLocalizations> load(Locale locale) {
+    return SynchronousFuture<AppLocalizations>(lookupAppLocalizations(locale));
+  }
+
+  @override
+  bool isSupported(Locale locale) =>
+      <String>['en', 'hi', 'mr'].contains(locale.languageCode);
+
+  @override
+  bool shouldReload(_AppLocalizationsDelegate old) => false;
+}
+
+AppLocalizations lookupAppLocalizations(Locale locale) {
+  // Lookup logic when only language code is specified.
+  switch (locale.languageCode) {
+    case 'en':
+      return AppLocalizationsEn();
+    case 'hi':
+      return AppLocalizationsHi();
+    case 'mr':
+      return AppLocalizationsMr();
+  }
+
+  throw FlutterError(
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.',
+  );
+}

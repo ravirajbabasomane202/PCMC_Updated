@@ -1,0 +1,74 @@
+# ──────────────────────────────────────────────
+# PCMC Grievance System — .gitignore
+# ──────────────────────────────────────────────
+
+# Environment variables — NEVER commit these
+.env
+*.env
+.env.local
+.env.production
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.coverage
+htmlcov/
+.pytest_cache/
+venv/
+.venv/
+env/
+
+# Flask
+instance/
+*.db
+
+# Uploads (user-generated content — store in object storage in production)
+grievance-system-backend/uploads/*
+!grievance-system-backend/uploads/.gitkeep
+
+# Flutter / Dart
+main_ui/.dart_tool/
+main_ui/.flutter-plugins
+main_ui/.flutter-plugins-dependencies
+main_ui/.packages
+main_ui/build/
+main_ui/pubspec.lock
+main_ui/android/.gradle/
+main_ui/android/local.properties
+main_ui/android/app/google-services.json
+main_ui/ios/Pods/
+main_ui/ios/.symlinks/
+main_ui/ios/Flutter/App.framework
+main_ui/ios/Flutter/Flutter.framework
+main_ui/ios/Flutter/Flutter.podspec
+main_ui/ios/Flutter/Generated.xcconfig
+main_ui/ios/Flutter/ephemeral/
+main_ui/ios/Runner.xcworkspace/
+main_ui/macos/Flutter/GeneratedPluginRegistrant.swift
+main_ui/macos/Flutter/ephemeral/
+
+# Google Services (NEVER commit — not needed since Firebase is removed)
+google-services.json
+GoogleService-Info.plist
+main_ui/lib/firebase_options.dart
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.docker/

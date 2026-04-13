@@ -1,0 +1,78 @@
+# ──────────────────────────────────────────────────────
+#  PCMC Grievance System — Docker Compose (production)
+#  Usage: docker compose up -d
+# ──────────────────────────────────────────────────────
+version: "3.9"
+
+services:
+
+  # ── PostgreSQL ────────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: grievance_db
+      POSTGRES_USER: pcmc
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pcmc -d grievance_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis (rate-limit counter + optional cache) ───────
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Backend API ───────────────────────────────────────
+  backend:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      APP_ENV: production
+      DATABASE_URL: postgresql://pcmc:${POSTGRES_PASSWORD:-changeme}@db:5432/grievance_db
+      REDIS_URL: redis://redis:6379/0
+      SECRET_KEY: ${SECRET_KEY}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      SECURITY_PASSWORD_SALT: ${SECURITY_PASSWORD_SALT}
+      RESET_TOKEN_SECRET: ${RESET_TOKEN_SECRET}
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+      FRONTEND_CALLBACK_URL: ${FRONTEND_CALLBACK_URL:-https://www.nivaran.co.in}
+      # Google OAuth (optional)
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      # Workers — set to (2*CPUs)+1 or override via env
+      WEB_CONCURRENCY: ${WEB_CONCURRENCY:-5}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - uploads:/app/uploads
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+volumes:
+  pgdata:
+  redisdata:
+  uploads:
