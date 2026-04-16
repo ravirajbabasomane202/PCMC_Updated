@@ -32,7 +32,7 @@ limiter = Limiter(key_func=get_remote_address, default_limits=["300 per minute"]
 
 
 def ensure_master_data():
-    from .models import MasterAreas, MasterCategories, MasterConfig, MasterSubjects
+    from .models import MasterAreas, MasterCategories, MasterConfig, MasterSubjects, User, Role
 
     has_changes = False
 
@@ -156,6 +156,20 @@ def ensure_master_data():
     for key, (value, desc) in configs.items():
         if not MasterConfig.query.filter_by(key=key).first():
             db.session.add(MasterConfig(key=key, value=value, description=desc))
+            has_changes = True
+
+    # Sample users
+    sample_users = [
+        ("Admin User", "admin@pcmc.gov.in", Role.ADMIN),
+        ("Member Head", "member@pcmc.gov.in", Role.MEMBER_HEAD),
+        ("Field Staff", "field@pcmc.gov.in", Role.FIELD_STAFF),
+        ("Test Citizen", "citizen@example.com", Role.CITIZEN),
+    ]
+    for name, email, role in sample_users:
+        if not User.query.filter_by(email=email).first():
+            u = User(name=name, email=email, role=role)
+            u.set_password("Test@1234")
+            db.session.add(u)
             has_changes = True
 
     if has_changes:

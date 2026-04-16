@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart'
 class Constants {
   static String get baseUrl {
     // Use API_BASE_URL from dart-define if available, otherwise use default
-    const apiBaseUrl = String.fromEnvironment('API_BASE_URL', defaultValue: 'https://www.nivaran.co.in');
+    const apiBaseUrl = String.fromEnvironment('API_BASE_URL', defaultValue: 'https://pcmc-updated.onrender.com');
 
     if (kIsWeb) return apiBaseUrl;
 
