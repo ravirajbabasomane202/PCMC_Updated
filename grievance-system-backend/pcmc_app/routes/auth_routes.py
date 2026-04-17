@@ -316,3 +316,28 @@ def reset_password(token):
     user.set_password(new_password)
     db.session.commit()
     return jsonify({'msg': 'Password reset successfully'}), 200
+
+
+# ── Seed Sample Users (Temporary for testing) ─────────────────────────────────
+
+@auth_bp.route('/seed-sample', methods=['POST'])
+def seed_sample():
+    """Seed sample users if they don't exist. Temporary route for testing."""
+    sample_users = [
+        ("Admin User", "admin@pcmc.gov.in", Role.ADMIN),
+        ("Member Head", "member@pcmc.gov.in", Role.MEMBER_HEAD),
+        ("Field Staff", "field@pcmc.gov.in", Role.FIELD_STAFF),
+        ("Test Citizen", "citizen@example.com", Role.CITIZEN),
+    ]
+    seeded = []
+    for name, email, role in sample_users:
+        if not User.query.filter_by(email=email).first():
+            u = User(name=name, email=email, role=role)
+            u.set_password("Test@1234")
+            db.session.add(u)
+            seeded.append(email)
+    if seeded:
+        db.session.commit()
+        return jsonify({"msg": f"Sample users seeded: {seeded}"}), 200
+    else:
+        return jsonify({"msg": "Sample users already exist"}), 200
