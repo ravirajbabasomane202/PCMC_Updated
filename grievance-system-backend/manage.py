@@ -10,8 +10,8 @@ Usage:
 """
 
 import sys
-from app import create_app, db
-from app.models import (
+from pcmc_app import create_app, db
+from pcmc_app.models import (
     MasterAreas, MasterCategories, MasterConfig, MasterSubjects, Role, User,
 )
 

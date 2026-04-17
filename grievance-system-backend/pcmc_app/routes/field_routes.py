@@ -1,7 +1,7 @@
 # app/routes/user_routes.py
 from flask import Blueprint, request, jsonify
-from app.models import User, Role
-from app import db
+from ..models import User, Role
+from .. import db
 
 fieldStaff = Blueprint("fieldStaff", __name__, url_prefix="/fieldStaff")
 
